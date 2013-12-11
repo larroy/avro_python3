@@ -1,0 +1,2 @@
+avro cat can fail when there are fields of type bytes:
+http://bugs.python.org/issue10976
