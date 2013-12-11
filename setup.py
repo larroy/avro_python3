@@ -24,7 +24,7 @@ from sys import version_info
 assert (version_info[0] >= 3), ('This requires Python 3')
 
 setup(
-  name = 'avro',
+  name = 'avro3k',
   version = '1.7.6-SNAPSHOT',
   packages = ['avro',],
   package_dir = {'avro': 'src/avro'},
