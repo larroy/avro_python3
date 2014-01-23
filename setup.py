@@ -20,8 +20,27 @@
 
 from distutils.core import setup
 from sys import version_info
+import distutils.cmd
+import subprocess
 
 assert (version_info[0] >= 3), ('This requires Python 3')
+
+
+def xsystem(*args, **kw):
+    if subprocess.call(args, **kw) != 0:
+        raise RuntimeError('check_exit failed, while executing: ', ' '.join(args))
+
+class TestLaunch(distutils.cmd.Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        xsystem("./run_tests.py", cwd='test')
+
 
 setup(
   name = 'avro3k',
@@ -29,6 +48,7 @@ setup(
   packages = ['avro',],
   package_dir = {'avro': 'src/avro'},
   scripts = ["./scripts/avro"],
+  cmdclass = {'test': TestLaunch},
 
   # metadata for upload to PyPI
   author = 'Apache Avro',
